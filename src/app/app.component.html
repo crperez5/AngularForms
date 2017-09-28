@@ -1,0 +1,47 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+        <fieldset ngModelGroup="login">
+            <input
+            name="username"
+            required
+            minlength="3"
+            type="text" 
+            [(ngModel)]="username"
+            #usernameRef="ngModel"
+          />
+          <input
+            name="password"
+            required
+            minlength="3"
+            type="password" 
+            ngModel
+            #passwordRef="ngModel"
+           />
+        </fieldset>
+        <div *ngFor="let location of locations">
+            <input 
+              [id]="location" 
+              name="location"
+              type="radio"
+              required
+              [ngModel]="locations[0]"
+              [value]="location"
+            /> 
+            <label [attr.for]="location">{{location}}</label> 
+        </div>
+        <button type="submit">Submit</button> 
+    </form>
+    
+      <div *ngIf="!formRef.valid">There are errors:
+          <hr>
+      </div>
+    
+      <div *ngIf="usernameRef.errors?.required">Username is required. </div>
+      <div *ngIf="usernameRef.errors?.minlength">The min length for username is 3. </div> 
+      <div *ngIf="passwordRef.errors?.required">Password field is required. </div>
+      <div *ngIf="passwordRef.errors?.minlength">The min length for password is 3. </div> 
+
+
+     
+ </div>
